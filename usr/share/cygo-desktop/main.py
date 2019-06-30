@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #  cygo-desktop.py
@@ -21,31 +21,140 @@
 #  MA 02110-1301, USA.
 #
 #
+#DEPENDS:
+#	PIP3: pywebview
+#	APT: python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.0
 
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
-import webkit
-import gobject
+import webview
+import threading
+from time import sleep
 
-class webview(Gtk.Window):
-	def __init__(self):
-		Gtk.Window.__init__(self, title="CYGO Desktop)
-		self.grid=Gtk.Grid(orientation=Gtk.Orientation.VERTICAL,)
-		self.add(self.grid)
-		
-		self.bro = webkit.WebView()
-		self.bro.open("https://cygo.network")
-		self.grid.attach(self.bro, 1, 1, 1, 1)
+def load_html():
+    webview.load_html("""
+    <style>
+        body {
+            background-color: #333;
+            color: white;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
 
-def show_webview():
-	window = webview()
-	window.set_decorated(True)
-	window.set_resizable(True)
-	window.set_opacity(0.0)
-	window.set_position(Gtk.WindowPosition.CENTER)
-	window.show_all()
-	Gtk.main()
-	window.connect("delete-event", Gtk.main_quit)
- 
- show_webview()
+        .main-container {
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            -webkit-align-items: center;
+            justify-content: center;
+            -webkit-justify-content: center;
+            overflow: hidden;
+        }
+
+        .loading-container {
+        }
+
+        .loader {
+          font-size: 10px;
+          margin: 50px auto;
+          text-indent: -9999em;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          background: #ffffff;
+          background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+          position: relative;
+          -webkit-animation: load3 1.4s infinite linear;
+          animation: load3 1.4s infinite linear;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+        }
+        .loader:before {
+          width: 50%;
+          height: 50%;
+          background: #ffffff;
+          border-radius: 100% 0 0 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+        }
+        .loader:after {
+          background: #333;
+          width: 75%;
+          height: 75%;
+          border-radius: 50%;
+          content: '';
+          margin: auto;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+        @-webkit-keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes load3 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+
+        .loaded-container {
+            display: none;
+        }
+
+
+    </style>
+    <body>
+      <div class="main-container">
+          <div id="loader" class="loading-container">
+              <div class="loader">Loading...</div>
+          </div>
+
+          <div id="main" class="loaded-container">
+              <h1>Content is loaded!</h1>
+          </div>
+      </div>
+
+      <script>
+          setTimeout(function() {
+              document.getElementById('loader').style.display = 'none'
+              document.getElementById('main').style.display = 'block'
+          }, 5000)
+      </script>
+    </body>
+
+    """)
+
+def change_url():
+	sleep(3)
+	webview.load_url("https://cygo.network")
+
+if __name__ == '__main__':
+    a = threading.Thread(target=load_html)
+    a.start()
+    b = threading.Thread(target=change_url)
+    b.start()
+
+web = webview.create_window("TEST","https://cygo.network", confirm_quit=True, )
+
+
+#IT GOT BETTER

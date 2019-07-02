@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=CYGO Desktop
+Version=1.0
+Exec=cygo-desktop
+Comment=Desktop App for CYGO Network
+Icon=/usr/share/icons/Drauger/128x128/apps/CYGO.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Application;GTK;

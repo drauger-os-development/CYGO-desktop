@@ -23,11 +23,15 @@
 #
 #DEPENDS:
 #	PIP3: pywebview
-#	APT: python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.0
-
 import webview
 import threading
 from time import sleep
+from sys import argv
+
+if sys.argv[1] == "FIRST-TIME-URL":
+	URL="Put first time url here"
+else
+	URL="Put url for all other times here"
 
 def load_html():
     webview.load_html("""
@@ -146,7 +150,7 @@ def load_html():
 
 def change_url():
 	sleep(3)
-	webview.load_url("https://cygo.network")
+	webview.load_url(URL)
 
 if __name__ == '__main__':
     a = threading.Thread(target=load_html)
@@ -154,7 +158,4 @@ if __name__ == '__main__':
     b = threading.Thread(target=change_url)
     b.start()
 
-web = webview.create_window("TEST","https://cygo.network", confirm_quit=True, )
-
-
-#IT GOT BETTER
+web = webview.create_window("TEST", URL, confirm_quit=True, )

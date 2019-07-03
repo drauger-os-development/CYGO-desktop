@@ -1,2 +1,2 @@
 #!/bin/bash
-pip3 uninstall -y pywebview
+su $(users) -c 'pip3 uninstall -y pywebview'

@@ -26,9 +26,12 @@ import threading
 from time import sleep
 from sys import argv
 
-if sys.argv[1] == "FIRST-TIME-URL":
-	URL="https://desktop.cygonetwork.com/draugeros-firstrun/"
-else
+try:
+	if argv[1] == "FIRST-TIME-URL":
+		URL="https://desktop.cygonetwork.com/draugeros-firstrun/"
+	else:
+		URL="https://u.cygonetwork.com/sign-in"
+except:
 	URL="https://u.cygonetwork.com/sign-in"
 
 def load_html():

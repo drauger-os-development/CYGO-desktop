@@ -35,7 +35,7 @@ elif [ -z "$1" ] || [ "$1" == "" ] || [ "$1" == " " ]; then
 	if [ -f /home/$(users)/.config/cygo-first-run.flag ]; then
 		python3 /usr/share/cygo-desktop/main.py &
 	else
-		su $(users) -c "touch /home/$(users)/.config/cygo-first-run.flag"
+		touch /home/$(users)/.config/cygo-first-run.flag
 		python3 /usr/share/cygo-desktop/main.py "FIRST-TIME-URL" &
 	fi
 fi

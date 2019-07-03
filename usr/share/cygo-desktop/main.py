@@ -21,17 +21,15 @@
 #  MA 02110-1301, USA.
 #
 #
-#DEPENDS:
-#	PIP3: pywebview
 import webview
 import threading
 from time import sleep
 from sys import argv
 
 if sys.argv[1] == "FIRST-TIME-URL":
-	URL="Put first time url here"
+	URL="https://desktop.cygonetwork.com/draugeros-firstrun/"
 else
-	URL="Put url for all other times here"
+	URL="https://u.cygonetwork.com/sign-in"
 
 def load_html():
     webview.load_html("""
@@ -158,4 +156,4 @@ if __name__ == '__main__':
     b = threading.Thread(target=change_url)
     b.start()
 
-web = webview.create_window("TEST", URL, confirm_quit=True, )
+web = webview.create_window("CYGO Desktop", URL, confirm_quit=True, )

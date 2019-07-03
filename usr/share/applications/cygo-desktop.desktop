@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=CYGO Desktop
-Version=1.0
+Version=0.0.2
 Exec=cygo-desktop
 Comment=Desktop App for CYGO Network
-Icon=/usr/share/icons/Drauger/128x128/apps/CYGO.png
+Icon=CYGO-desktop
 Type=Application
 Terminal=false
 StartupNotify=true

@@ -23,7 +23,7 @@
 #
 set -e
 set -o pipefail
-VERSION="0.0.1"
+VERSION="0.0.2"
 help_dialoge="\nCYGO Desktop, Version $VERSION\n-h, --help\tShow this help dialoge and exit.\n-v, --version\tPrint the current version\n"
 if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 	echo -e "$help_dialoge"

@@ -1,11 +1,11 @@
 Package: cygo-desktop
-Version: 0.0.2
+Version: 0.0.4
 Maintainer: Thomas Castleman <contact@draugeros.org>
 Section: web
 Homepage: https://github.com/drauger-os-development/CYGO-desktop
 Architecture: all
 Priority: optional
-Depends: python-gi (>=3.26.1-2ubuntu1), python-gi-cairo (>=3.26.1-2ubuntu1), python3-gi (>=3.26.1-2ubuntu1), python3-gi-cairo (>=3.26.1-2ubuntu1), gir1.2-gtk-3.0 (>=3.22.30-1ubuntu3), gir1.2-webkit2-4.0 (>=2.24.2-0ubuntu0.18.04.1), bash, python3
+Depends: python3-webview (>=2.2), python3-gi (>=3.26.1-2ubuntu1), python3-gi-cairo (>=3.26.1-2ubuntu1), gir1.2-gtk-3.0 (>=3.22.30-1ubuntu3), gir1.2-webkit2-4.0 (>=2.24.2-0ubuntu0.18.04.1), bash, python3
 Description: Desktop app for CYGO Network
  This is a desktop app for Drauger OS users who are part of the CYGO network
 

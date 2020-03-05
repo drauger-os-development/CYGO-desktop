@@ -1,13 +1,9 @@
 # DO NOT USE THIS TO ACTUALLY INSTALL THE PACKAGES FROM PIP
 APT:
- * python-gi (>=3.26.1-2ubuntu1)
- * python-gi-cairo (>=3.26.1-2ubuntu1)
  * python3-gi (>=3.26.1-2ubuntu1)
  * python3-gi-cairo (>=3.26.1-2ubuntu1)
  * gir1.2-gtk-3.0 (>=3.22.30-1ubuntu3)
  * gir1.2-webkit2-4.0 (>=2.24.2-0ubuntu0.18.04.1)
- * bash
+ * bash (only for building packages)
  * python3
- 
-PIP3 (Yes you HAVE to use PIP3 otherwise these deps won't work cause we are on Python 3):
- * pywebview
+ * python3-webview

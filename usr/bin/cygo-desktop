@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  cygo-desktop
+#  cygo-desktop.py
 #
-#  Copyright 2019 Thomas Castleman <contact@draugeros.org>
+#  Copyright 2020 Thomas Castleman <contact@draugeros.org>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,23 +21,24 @@
 #  MA 02110-1301, USA.
 #
 #
-set -e
-set -o pipefail
-VERSION="0.0.2"
-help_dialoge="\nCYGO Desktop, Version $VERSION\n-h, --help\tShow this help dialoge and exit.\n-v, --version\tPrint the current version\n"
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
-	echo -e "$help_dialoge"
-	exit 0
-elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
-	echo -e "\nCYGO Desktop, Version $VERSION\n"
-	exit 0
-elif [ -z "$1" ] || [ "$1" == "" ] || [ "$1" == " " ]; then
-	if [ -f /home/$(users)/.config/cygo-first-run.flag ]; then
-		python3 /usr/share/cygo-desktop/main.py &
-	else
-		touch /home/$(users)/.config/cygo-first-run.flag
-		python3 /usr/share/cygo-desktop/main.py "FIRST-TIME-URL" &
-	fi
-fi
-	
+from sys import argv
+from subprocess import Popen
+from os import path
 
+VERSION = "0.0.4"
+help_dialoge = "\nCYGO Desktop, Version %s \n-h, --help\tShow this help dialoge and exit.\n-v, --version\tPrint the current version\n\nRun with no options to launch the GUI.\n" % (VERSION)
+argc = len(argv)
+if (argc > 1):
+	if ((argv[1] == "-h") or (argv[1] == "--help")):
+		print(help_dialoge)
+		exit(0)
+	elif ((argv[1] == "-v") or (argv[1] == "--version" )):
+		print("\nCYGO Desktop, Version %s\n" % (VERSION))
+		exit(0)
+else:
+	if (path.exists("/etc/cygo-desktop/cygo-first-run.flag")):
+			Popen("/usr/share/cygo-desktop/main.py")
+	else:
+			with open("/etc/cygo-desktop/cygo-first-run.flag", "w+") as flag_file:
+				flag_file.write("")
+			Popen(["/usr/share/cygo-desktop/main.py", "FIRST-TIME-URL"])

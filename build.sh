@@ -56,8 +56,18 @@ fi
 if [ -d srv ]; then
 	cp -R srv ../"$PAK"_"$VERSION"_all/srv
 fi
-cp -R DEBIAN ../"$PAK"_"$VERSION"_all/DEBIAN
-cd ..
-gzip "$PAK"_"$VERSION"_all/usr/share/doc/$PAK/changelog
-dpkg-deb --build "$PAK"_"$VERSION"_all
+if [ "$1" == "tar" ]; then
+	DEP=$(cat DEBIAN/control | grep 'Depends: ' | sed 's/Depends: //g')
+	DEP=$(echo "$DEP" | sed -e 's/([^()]*)//g' | sed 's/ , //g')
+	echo "$DEP" > ../"$PAK"_"$VERSION"_all/deps.txt
+	cp README.md ../"$PAK"_"$VERSION"_all/README.md
+	cd ..
+	tar -cf "$PAK"_"$VERSION"_all.tar "$PAK"_"$VERSION"_all
+	xz -z --threads=$(nproc) "$PAK"_"$VERSION"_all.tar
+else
+	cp -R DEBIAN ../"$PAK"_"$VERSION"_all/DEBIAN
+	cd ..
+	gzip "$PAK"_"$VERSION"_all/usr/share/doc/$PAK/changelog
+	dpkg-deb --build "$PAK"_"$VERSION"_all
+fi
 rm -rf "$PAK"_"$VERSION"_all

@@ -25,7 +25,7 @@ from sys import argv
 from subprocess import Popen
 from os import path
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 help_dialoge = "\nCYGO Desktop, Version %s \n-h, --help\tShow this help dialoge and exit.\n-v, --version\tPrint the current version\n\nRun with no options to launch the GUI.\n" % (VERSION)
 argc = len(argv)
 if (argc > 1):
@@ -36,9 +36,9 @@ if (argc > 1):
 		print("\nCYGO Desktop, Version %s\n" % (VERSION))
 		exit(0)
 else:
-	if (path.exists("/etc/cygo-desktop/cygo-first-run.flag")):
-			Popen("/usr/share/cygo-desktop/main.py")
+	if (path.exists("../../etc/cygo-desktop/cygo-first-run.flag")):
+			Popen("../share/cygo-desktop/main.py")
 	else:
-			with open("/etc/cygo-desktop/cygo-first-run.flag", "w+") as flag_file:
+			with open("../../etc/cygo-desktop/cygo-first-run.flag", "w+") as flag_file:
 				flag_file.write("")
-			Popen(["/usr/share/cygo-desktop/main.py", "FIRST-TIME-URL"])
+			Popen(["../share/cygo-desktop/main.py", "FIRST-TIME-URL"])

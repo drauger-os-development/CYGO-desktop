@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=CYGO Desktop
-Version=0.0.4
+Version=0.0.5
 Exec=cygo-desktop
 Comment=Desktop App for CYGO Network
 Icon=CYGO-desktop
